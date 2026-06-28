@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charte Graphique du Club – HBMHJ</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary:   #1a3a5c;
+      --accent:    #e8612a;
+      --light-bg:  #f4f6f9;
+      --card-bg:   #ffffff;
+      --border:    #d0d7e2;
+      --text:      #1e2a38;
+      --muted:     #6b7a90;
+      --success:   #1e7e34;
+      --radius:    10px;
+      --shadow:    0 4px 18px rgba(0, 0, 0, 0.10);
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--light-bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0 60px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      padding: 22px 40px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+
+    header .club-initial {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    header p {
+      font-size: 0.88rem;
+      opacity: 0.78;
+      margin-top: 2px;
+    }
+
+    /* ── MAIN CONTAINER ── */
+    main {
+      width: 100%;
+      max-width: 900px;
+      margin-top: 36px;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* ── SECTION CARD ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header .icon {
+      font-size: 1.1rem;
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    /* ── PDF VIEWER ── */
+    .pdf-intro {
+      font-size: 0.93rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .pdf-wrapper {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #e8e8e8;
+    }
+
+    .pdf-wrapper embed,
+    .pdf-wrapper iframe {
+      width: 100%;
+      height: 620px;
+      display: block;
+      border: none;
+    }
+
+    .pdf-fallback {
+      display: none;
+      padding: 24px;
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    /* ── FORM ── */
+    .form-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    input[type="text"] {
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.97rem;
+      color: var(--text);
+      transition: border-color 0.2s;
+      outline: none;
+      background: #fff;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    /* ── CHECKBOX ── */
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: var(--light-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 24px;
+      transition: opacity 0.2s;
+    }
+
+    .checkbox-row.disabled-block {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .checkbox-row input[type="checkbox"]:disabled {
+      cursor: not-allowed;
+    }
+
+    .checkbox-row label {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    /* ── BUTTON ── */
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.02rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+
+    button[type="submit"]:hover:not(:disabled) {
+      background: #c94e1e;
+      transform: translateY(-1px);
+    }
+
+    button[type="submit"]:disabled {
+      background: #b0b8c5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    button[type="submit"]:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    /* ── MESSAGES ── */
+    .msg {
+      display: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-top: 16px;
+    }
+
+    .msg.success {
+      background: #d4edda;
+      color: var(--success);
+      border: 1px solid #b8dfc5;
+      display: block;
+    }
+
+    .msg.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c2c7;
+      display: block;
+    }
+
+    /* ── LOADER ── */
+    .loader {
+      display: none;
+      width: 22px;
+      height: 22px;
+      border: 3px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 40px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      .card-body { padding: 16px; }
+      .form-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="club-initial">HJ</div>
+    <div>
+      <h1>HBMHJ – Charte Graphique du Club</h1>
+      <p>Lecture et acceptation formelle par les licenciés</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- PDF -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">📄</span>
+        Charte graphique 2026
+      </div>
+      <div class="card-body">
+        <p class="pdf-intro">
+          Veuillez lire attentivement la charte graphique du club avant de remplir le formulaire d'acceptation ci-dessous.
+        </p>
+        <div class="pdf-wrapper">
+          <embed
+            id="pdfEmbed"
+            src="charte.pdf"
+            type="application/pdf"
+            title="Charte graphique HBMHJ 2026"
+          />
+        </div>
+        <p class="pdf-fallback" id="pdfFallback">
+          Votre navigateur ne peut pas afficher le PDF directement.
+          <a href="charte.pdf" target="_blank" rel="noopener">Cliquez ici pour télécharger la charte.</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- FORMULAIRE -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">✍️</span>
+        Formulaire d'acceptation
+      </div>
+      <div class="card-body">
+
+        <form id="acceptanceForm" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom *</label>
+              <input type="text" id="nom" name="nom" placeholder="Ex : Dupont" autocomplete="family-name" required />
+            </div>
+            <div class="form-group">
+              <label for="prenom">Prénom *</label>
+              <input type="text" id="prenom" name="prenom" placeholder="Ex : Marie" autocomplete="given-name" required />
+            </div>
+          </div>
+
+          <div class="checkbox-row disabled-block" id="checkboxRow">
+            <input
+              type="checkbox"
+              id="acceptCheck"
+              name="accept"
+              disabled
+            />
+            <label for="acceptCheck">
+              J'ai lu et j'accepte la charte graphique du club HBMHJ dans son intégralité.
+            </label>
+          </div>
+
+          <button type="submit" id="submitBtn" disabled>
+            <span id="btnText">Valider mon acceptation</span>
+            <span class="loader" id="loader"></span>
+          </button>
+
+          <div class="msg" id="msgSuccess">
+            ✅ Votre acceptation a bien été enregistrée. Merci !
+          </div>
+          <div class="msg" id="msgError">
+            ❌ Une erreur est survenue lors de l'envoi. Veuillez réessayer ou contacter le club.
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2026 HBMHJ – Tous droits réservés
+  </footer>
+
+  <script>
+    // ──────────────────────────────────────────────────────────────────────────
+    // 🔧 REMPLACER cette URL par l'URL de votre Google Apps Script Web App
+    // ──────────────────────────────────────────────────────────────────────────
+    const APPS_SCRIPT_URL = 'VOTRE_URL_APPS_SCRIPT_ICI';
+    // ──────────────────────────────────────────────────────────────────────────
+
+    const nomInput      = document.getElementById('nom');
+    const prenomInput   = document.getElementById('prenom');
+    const acceptCheck   = document.getElementById('acceptCheck');
+    const submitBtn     = document.getElementById('submitBtn');
+    const checkboxRow   = document.getElementById('checkboxRow');
+    const form          = document.getElementById('acceptanceForm');
+    const msgSuccess    = document.getElementById('msgSuccess');
+    const msgError      = document.getElementById('msgError');
+    const btnText       = document.getElementById('btnText');
+    const loader        = document.getElementById('loader');
+
+    // ── Détection PDF non supporté ──
+    const embed = document.getElementById('pdfEmbed');
+    const fallback = document.getElementById('pdfFallback');
+    embed.addEventListener('error', () => {
+      embed.style.display = 'none';
+      fallback.style.display = 'block';
+    });
+
+    // ── Validation en temps réel ──
+    function updateState() {
+      const nomFilled    = nomInput.value.trim().length > 0;
+      const prenomFilled = prenomInput.value.trim().length > 0;
+      const allFilled    = nomFilled && prenomFilled;
+
+      // Activer / désactiver la case à cocher
+      acceptCheck.disabled = !allFilled;
+      checkboxRow.classList.toggle('disabled-block', !allFilled);
+
+      // Si les champs sont vidés, décocher automatiquement
+      if (!allFilled) {
+        acceptCheck.checked = false;
+      }
+
+      // Activer le bouton uniquement si case cochée
+      submitBtn.disabled = !(allFilled && acceptCheck.checked);
+    }
+
+    nomInput.addEventListener('input', updateState);
+    prenomInput.addEventListener('input', updateState);
+    acceptCheck.addEventListener('change', updateState);
+
+    // ── Soumission du formulaire ──
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Masquer les anciens messages
+      msgSuccess.className = 'msg';
+      msgError.className   = 'msg';
+
+      // Afficher le loader
+      btnText.style.display = 'none';
+      loader.style.display  = 'inline-block';
+      submitBtn.disabled    = true;
+
+      const payload = {
+        nom:        nomInput.value.trim(),
+        prenom:     prenomInput.value.trim(),
+        horodatage: new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
+      };
+
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+
+        const json = await response.json();
+        if (json.status === 'ok') {
+          msgSuccess.className = 'msg success';
+          form.reset();
+          updateState();
+        } else {
+          throw new Error('Réponse inattendue du serveur');
+        }
+      } catch (err) {
+        console.error(err);
+        msgError.className = 'msg error';
+        // Ré-activer le bouton pour permettre une nouvelle tentative
+        submitBtn.disabled = false;
+      } finally {
+        btnText.style.display = 'inline';
+        loader.style.display  = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
