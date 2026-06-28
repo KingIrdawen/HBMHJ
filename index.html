@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Charte Graphique du Club – HBMHJ</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="logo.jpg" type="image/jpeg" />
+
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -22,17 +26,39 @@
       --success:   #1e7e34;
       --radius:    10px;
       --shadow:    0 4px 18px rgba(0, 0, 0, 0.10);
+      --header-h:  88px;
     }
 
+    /* ── FOND AVEC LOGO EN FILIGRANE ── */
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--light-bg);
+      background-color: var(--light-bg);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 0 0 60px;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('logo.jpg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      opacity: 0.30; /* 70 % de transparence = 30 % d'opacité */
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Tout le contenu doit passer au-dessus du filigrane */
+    header, main, footer {
+      position: relative;
+      z-index: 1;
     }
 
     /* ── HEADER ── */
@@ -40,25 +66,22 @@
       width: 100%;
       background: var(--primary);
       color: #fff;
-      padding: 22px 40px;
+      padding: 16px 40px;
       display: flex;
       align-items: center;
       gap: 18px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      min-height: var(--header-h);
     }
 
-    header .club-initial {
-      width: 52px;
-      height: 52px;
+    header .club-logo {
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #fff;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.35);
       flex-shrink: 0;
+      background: #fff;
     }
 
     header h1 {
@@ -76,8 +99,8 @@
     /* ── MAIN CONTAINER ── */
     main {
       width: 100%;
-      max-width: 900px;
-      margin-top: 36px;
+      max-width: 1200px;
+      margin-top: 28px;
       padding: 0 16px;
       display: flex;
       flex-direction: column;
@@ -109,14 +132,14 @@
     }
 
     .card-body {
-      padding: 24px;
+      padding: 20px 24px;
     }
 
-    /* ── PDF VIEWER ── */
+    /* ── PDF VIEWER – plein écran ── */
     .pdf-intro {
       font-size: 0.93rem;
       color: var(--muted);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .pdf-wrapper {
@@ -130,7 +153,9 @@
     .pdf-wrapper embed,
     .pdf-wrapper iframe {
       width: 100%;
-      height: 620px;
+      /* Hauteur = viewport - header - card header - padding - intro text */
+      height: calc(100vh - var(--header-h) - 130px);
+      min-height: 500px;
       display: block;
       border: none;
     }
@@ -298,16 +323,20 @@
     }
 
     @media (max-width: 600px) {
-      header { padding: 16px 20px; }
-      .card-body { padding: 16px; }
+      header { padding: 14px 16px; }
+      .card-body { padding: 14px; }
       .form-row { flex-direction: column; }
+      .pdf-wrapper embed,
+      .pdf-wrapper iframe {
+        height: calc(100vh - var(--header-h) - 160px);
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="club-initial">HJ</div>
+    <img src="logo.jpg" alt="Logo HBMHJ" class="club-logo" />
     <div>
       <h1>HBMHJ – Charte Graphique du Club</h1>
       <p>Lecture et acceptation formelle par les licenciés</p>
@@ -399,7 +428,7 @@
 
   <script>
     // ──────────────────────────────────────────────────────────────────────────
-    // 🔧 REMPLACER cette URL par l'URL de votre Google Apps Script Web App
+    // 🔧 URL de la Google Apps Script Web App
     // ──────────────────────────────────────────────────────────────────────────
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSmRLn8EosYammDg3FMo6ZbA-nN7BNzObeR5KJ6hHp7D7eJv6sPjV5kjIk5xh6YKR8zA/exec';
     // ──────────────────────────────────────────────────────────────────────────
@@ -416,10 +445,10 @@
     const loader        = document.getElementById('loader');
 
     // ── Détection PDF non supporté ──
-    const embed = document.getElementById('pdfEmbed');
+    const embed   = document.getElementById('pdfEmbed');
     const fallback = document.getElementById('pdfFallback');
     embed.addEventListener('error', () => {
-      embed.style.display = 'none';
+      embed.style.display   = 'none';
       fallback.style.display = 'block';
     });
 
@@ -429,16 +458,11 @@
       const prenomFilled = prenomInput.value.trim().length > 0;
       const allFilled    = nomFilled && prenomFilled;
 
-      // Activer / désactiver la case à cocher
       acceptCheck.disabled = !allFilled;
       checkboxRow.classList.toggle('disabled-block', !allFilled);
 
-      // Si les champs sont vidés, décocher automatiquement
-      if (!allFilled) {
-        acceptCheck.checked = false;
-      }
+      if (!allFilled) acceptCheck.checked = false;
 
-      // Activer le bouton uniquement si case cochée
       submitBtn.disabled = !(allFilled && acceptCheck.checked);
     }
 
@@ -450,11 +474,9 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Masquer les anciens messages
       msgSuccess.className = 'msg';
       msgError.className   = 'msg';
 
-      // Afficher le loader
       btnText.style.display = 'none';
       loader.style.display  = 'inline-block';
       submitBtn.disabled    = true;
@@ -466,9 +488,11 @@
       };
 
       try {
+        // ⚠️ On utilise Content-Type: text/plain pour éviter le preflight CORS
+        // que Google Apps Script ne sait pas gérer. Le corps reste du JSON valide.
         const response = await fetch(APPS_SCRIPT_URL, {
           method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain' },
           body:    JSON.stringify(payload)
         });
 
@@ -480,12 +504,11 @@
           form.reset();
           updateState();
         } else {
-          throw new Error('Réponse inattendue du serveur');
+          throw new Error('Réponse inattendue : ' + JSON.stringify(json));
         }
       } catch (err) {
         console.error(err);
         msgError.className = 'msg error';
-        // Ré-activer le bouton pour permettre une nouvelle tentative
         submitBtn.disabled = false;
       } finally {
         btnText.style.display = 'inline';
